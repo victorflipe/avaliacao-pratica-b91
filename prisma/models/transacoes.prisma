@@ -1,0 +1,31 @@
+enum TipoTransacao {
+    CREDITO
+    DEBITO
+}
+
+enum Status{ 
+    APROVADA
+    REPROVADA
+}
+
+enum NivelRisco{
+    MEDIO
+    BAIXO
+    ALTO
+}
+
+
+model Transacao {
+    id Int @default(autoincrement()) @id
+    valor Decimal
+    data DateTime? @default(now())
+    parcela Int
+    taxa Decimal
+    valor_liquido Decimal?
+    status Status?
+    tipo_transacao TipoTransacao
+    nivel_risco NivelRisco?
+
+    cliente Cliente? @relation(fields: [clienteId], references: [id])
+    clienteId Int?
+}
